@@ -1,1 +1,24 @@
 
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+int main(int argc, char** argv) {
+	
+	// zapisywanie do pliku
+	ofstream plik;
+	plik.open("test.txt");
+	plik<<"Test zapisu"<<endl;
+	plik.close();
+	
+	// odczytywanie z pliku
+	string wiersz;
+	ifstream plik2;
+	plik2.open("test.txt");
+	while(getline(plik2,wiersz))
+		cout<<wiersz<<endl;
+		plik2.close();
+	return 0;
+}
