@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class User
+{
+	protected:
+		string login, password;
+	public:
+		User(string login,string password){
+			this->login=login;
+			this->password=password;
+		}
+		
+		bool authorize(string login, string password) {
+		    if(this->login==login && this->password==password)
+		    	return true;
+		    else
+		    	return false;
+		}
+};
+
+class Student : public User
+{
+	private:
+		int semestr;
+	public:
+		Student(int SEMESTR) : User("",""), semestr(SEMESTR)
+		{	
+		} 
+	void test()
+		{
+			cout<<semestr<<endl;
+		}
+};
+
+int main(int argc, char** argv) {
+	Student student = Student(5);
+	student.test();
+	return 0;
+}
