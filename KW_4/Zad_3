@@ -1,0 +1,84 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class User
+{
+	protected:
+		string login, password;
+	public:
+		User(string login,string password){
+			this->login=login;
+			this->password=password;
+		}
+		
+		bool authorize(string login, string password) {
+		    if(this->login==login && this->password==password)
+		    	return true;
+		    else
+		    	return false;
+		}
+};
+
+class Student : public User
+{
+	private:
+		int semestr;
+	public:
+		Student(int SEMESTR,string login, string password) : User(login,password), semestr(SEMESTR)
+		{}
+		void test()
+		{
+			cout<<semestr<< endl;	
+		}
+		void setSemestr(int semestr)
+		{
+			this->semestr = semestr;
+		}
+		int getSemestr()
+		{
+			return semestr;
+		}
+};
+
+class Subject
+{
+	private:
+		string name;
+		int maxStud, currentStud;
+		Student *students[100];
+	public:
+		Subject(string name, int maxStud)
+		{
+			currentStud =0;
+			this->name = name;
+			this->maxStud = maxStud;
+		}
+		bool addStudent(Student *stud)
+		{
+			if(currentStud < maxStud)
+				{
+					students[currentStud] = stud;
+					currentStud ++;
+					return true;
+				}
+			else
+				return false;
+		}
+		void test()
+		{
+			cout<< students[0]->getSemestr() <<endl;
+		}
+};
+
+int main(int argc, char** argv) 
+{
+	Subject subject = Subject("POb",10);
+	Student student = Student(1,"user","pass");
+	subject.addStudent(&student);
+	subject.test();
+	student.setSemestr(5);
+	subject.test();
+	return 0;
+}
